@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://cyae752yjtepk" path="res://scenes/Player.tscn" id="1_01cyd"]
 [ext_resource type="Texture2D" uid="uid://dhk7rfnhwqq8v" path="res://assets/character and tileset/Dungeon_Tileset.png" id="2_3q7ds"]
-[ext_resource type="PackedScene" uid="uid://dirdfnadxygaw" path="res://scenes/arrow.tscn" id="3_rlurk"]
+[ext_resource type="PackedScene" uid="uid://bvj763g2hkfmj" path="res://scenes/priest.tscn" id="4_xcxcr"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_w1vgd"]
 texture = ExtResource("2_3q7ds")
@@ -324,7 +324,6 @@ z_index = 5
 position = Vector2(0, -7)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
-zoom = Vector2(2, 2)
 position_smoothing_enabled = true
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -335,5 +334,19 @@ layer_0/tile_data = PackedInt32Array(-720912, 65536, 3, -720911, 65536, 3, -7209
 layer_1/name = "mid"
 layer_1/tile_data = PackedInt32Array(65533, 65536, 4, 65534, 65536, 4, 65535, 196608, 4, 0, 196608, 4, 1, 65536, 4, 2, 65536, 4, 3, 65536, 4, 4, 65536, 4, 5, 65536, 4, 6, 65536, 4, 65532, 65536, 4, 65531, 65536, 4, 65530, 65536, 4, 131066, 524288, 7, 131067, 524288, 7, 131068, 524288, 7, 131069, 524288, 7, 131070, 524288, 7, 131071, 524288, 7, 65536, 524288, 7, 65537, 524288, 7, 65538, 524288, 7, 65539, 524288, 7, 65540, 524288, 7, 65541, 524288, 7, 65542, 524288, 7, 7, 65536, 4, 8, 65536, 4, 9, 65536, 4, 10, 65536, 4, 11, 65536, 4, 12, 65536, 4, 13, 65536, 4, 14, 65536, 4, 15, 65536, 4, 16, 65536, 4, 17, 65536, 4, 18, 65536, 4, 19, 65536, 4, 65529, 65536, 4, 65528, 65536, 4, 65527, 65536, 4, 65526, 65536, 4, 65525, 65536, 4, 65524, 65536, 4, 65523, 65536, 4, 65522, 65536, 4, 65521, 65536, 4, 65520, 65536, 4, 65519, 65536, 4, -131079, 65536, 4, -131078, 65536, 4, -131077, 65536, 4, -131076, 65536, 4, -196605, 65536, 4, -196604, 65536, 4, -196603, 65536, 4, -196602, 65536, 4, -262158, 65536, 4, -262157, 65536, 4, -262156, 65536, 4, -262155, 65536, 4, -327670, 65536, 4, -327669, 65536, 4, -327668, 65536, 4, -327667, 65536, 4, -17, 0, 3, -65553, 0, 3, -131089, 0, 3, -196625, 0, 3, -262161, 0, 3, -327697, 0, 3, -393233, 0, 3, -458769, 0, 3, -524305, 0, 3, -589841, 0, 3, -655377, 0, 3, -720913, 0, 3, -65517, 327680, 3, -131053, 327680, 3, -196589, 327680, 3, -262125, 327680, 3, -327661, 327680, 3, -524269, 327680, 3, -589805, 327680, 3, -655341, 327680, 3, -720877, 327680, 3, -786413, 327680, 3, -458733, 327680, 3, -393197, 327680, 3)
 
-[node name="Arrow" parent="." instance=ExtResource("3_rlurk")]
-position = Vector2(-71, -64)
+[node name="Enemies" type="Node" parent="."]
+
+[node name="Priest" parent="Enemies" instance=ExtResource("4_xcxcr")]
+position = Vector2(259, -8)
+
+[node name="Priest2" parent="Enemies" instance=ExtResource("4_xcxcr")]
+position = Vector2(217, -87)
+
+[node name="Priest3" parent="Enemies" instance=ExtResource("4_xcxcr")]
+position = Vector2(186, -86)
+
+[node name="Priest4" parent="Enemies" instance=ExtResource("4_xcxcr")]
+position = Vector2(205, -8)
+
+[node name="Priest5" parent="Enemies" instance=ExtResource("4_xcxcr")]
+position = Vector2(-187, -88)

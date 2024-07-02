@@ -124,15 +124,20 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_8qm87")
+}],
+"loop": false,
+"name": &"bow_attack",
+"speed": 7.0
 }, {
+"frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_80pqy")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_2rj0t")
 }],
-"loop": true,
-"name": &"bow_attack",
+"loop": false,
+"name": &"bow_attack_realese",
 "speed": 10.0
 }, {
 "frames": [{
@@ -206,6 +211,8 @@ script = ExtResource("1_uigy0")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_fw10x")
 animation = &"bow_attack"
+frame = 6
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 z_index = 5
@@ -213,5 +220,12 @@ shape = SubResource("CapsuleShape2D_yuk8p")
 
 [node name="CoyoteTimer" type="Timer" parent="."]
 
-[node name="Bow_Marker" type="Marker2D" parent="."]
+[node name="Bow_Marker_Right" type="Marker2D" parent="."]
 position = Vector2(7, 0)
+
+[node name="Bow_Marker_Left" type="Marker2D" parent="."]
+position = Vector2(-7, 0)
+
+[node name="Shoot_timer" type="Timer" parent="."]
+wait_time = 1.5
+one_shot = true

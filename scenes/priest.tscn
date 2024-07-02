@@ -22,16 +22,15 @@ animations = [{
 radius = 4.0
 height = 14.0
 
-[node name="Priest" type="Node"]
+[node name="Priest" type="Area2D"]
 script = ExtResource("1_m53rn")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_jg8sg")
 animation = &"Idle"
+flip_h = true
 
-[node name="Area2D" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_y024p")
 
-[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
