@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://bvj763g2hkfmj"]
+
+[ext_resource type="Script" path="res://scripts/priest.gd" id="1_m53rn"]
+[ext_resource type="Texture2D" uid="uid://dap8t4x5pu5t8" path="res://assets/character and tileset/Dungeon_Character.png" id="1_n6ugo"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iqcl6"]
+atlas = ExtResource("1_n6ugo")
+region = Rect2(48, 32, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jg8sg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iqcl6")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 10.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y024p"]
+radius = 4.0
+height = 14.0
+
+[node name="Priest" type="Node"]
+script = ExtResource("1_m53rn")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_jg8sg")
+animation = &"Idle"
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CapsuleShape2D_y024p")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
