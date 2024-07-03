@@ -23,6 +23,8 @@ radius = 4.0
 height = 14.0
 
 [node name="Priest" type="Area2D"]
+collision_layer = 3
+collision_mask = 3
 script = ExtResource("1_m53rn")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -33,4 +35,4 @@ flip_h = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_y024p")
 
-[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

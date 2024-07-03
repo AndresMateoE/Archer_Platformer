@@ -4,9 +4,11 @@
 [ext_resource type="Texture2D" uid="uid://c0470n8pxm01f" path="res://icon.svg" id="1_3vmur"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2nq2c"]
-size = Vector2(27, 1)
+size = Vector2(22, 1)
 
-[node name="Arrow" type="Area2D"]
+[node name="Arrow" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("1_3q172")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

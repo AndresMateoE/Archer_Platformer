@@ -1,8 +1,9 @@
-[gd_scene load_steps=31 format=3 uid="uid://cyae752yjtepk"]
+[gd_scene load_steps=36 format=3 uid="uid://cyae752yjtepk"]
 
 [ext_resource type="Texture2D" uid="uid://dyx5yuce7jhhy" path="res://assets/Soldier/Soldier.png" id="1_5pslf"]
-[ext_resource type="Script" path="res://move.gd" id="1_uigy0"]
+[ext_resource type="Script" path="res://scripts/move.gd" id="1_uigy0"]
 [ext_resource type="Texture2D" uid="uid://ct88mnuofqw87" path="res://assets/Soldier/Soldier-Attack03.png" id="2_6v3d4"]
+[ext_resource type="Texture2D" uid="uid://bt5gjg3jtwbbw" path="res://assets/Soldier/Soldier-Death.png" id="3_vy814"]
 [ext_resource type="Texture2D" uid="uid://b2x3lawbgs61d" path="res://assets/Soldier/Soldier-Walk.png" id="4_t1do2"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kpapu"]
@@ -40,6 +41,22 @@ region = Rect2(700, 0, 100, 100)
 [sub_resource type="AtlasTexture" id="AtlasTexture_2rj0t"]
 atlas = ExtResource("2_6v3d4")
 region = Rect2(800, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_orcxh"]
+atlas = ExtResource("3_vy814")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5bg2t"]
+atlas = ExtResource("3_vy814")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2i6m0"]
+atlas = ExtResource("3_vy814")
+region = Rect2(200, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oholi"]
+atlas = ExtResource("3_vy814")
+region = Rect2(300, 0, 100, 100)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gpkxu"]
 atlas = ExtResource("1_5pslf")
@@ -142,6 +159,23 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_orcxh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5bg2t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2i6m0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oholi")
+}],
+"loop": false,
+"name": &"death",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_gpkxu")
 }, {
 "duration": 1.0,
@@ -210,15 +244,14 @@ script = ExtResource("1_uigy0")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_fw10x")
-animation = &"bow_attack"
-frame = 6
-frame_progress = 1.0
+animation = &"death"
+frame = 3
+frame_progress = 0.0911153
+flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 z_index = 5
 shape = SubResource("CapsuleShape2D_yuk8p")
-
-[node name="CoyoteTimer" type="Timer" parent="."]
 
 [node name="Bow_Marker_Right" type="Marker2D" parent="."]
 position = Vector2(7, 0)
@@ -226,6 +259,13 @@ position = Vector2(7, 0)
 [node name="Bow_Marker_Left" type="Marker2D" parent="."]
 position = Vector2(-7, 0)
 
+[node name="CoyoteTimer" type="Timer" parent="."]
+
 [node name="Shoot_timer" type="Timer" parent="."]
 wait_time = 1.5
 one_shot = true
+
+[node name="Death_timer" type="Timer" parent="."]
+wait_time = 1.5
+
+[connection signal="timeout" from="Death_timer" to="." method="_on_death_timer_timeout"]

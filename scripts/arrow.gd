@@ -1,17 +1,14 @@
-extends Area2D
+extends CharacterBody2D
 
 var speed = 150
 var arrow_gravity = 5
-var velocity = Vector2()
+#var velocity = Vector2()
 var vel = Vector2()
-
-#@onready var player_node = get_parent().get_node("Player")
-
 
 
 func _ready():
 	set_as_top_level(true)   #quiero que siempre este arriba el sprite
-
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
@@ -25,9 +22,13 @@ func _physics_process(delta):
 	position.y += (((Vector2.RIGHT).rotated(rotation)*speed).y + velocity.y) * delta
 	
 	var dir_vel = atan(vel.y/vel.x)
-	var dir_p = atan(position.x/position.y)
-	print(dir_vel)
-	$Sprite2D.global_rotation = dir_vel 
+	$Sprite2D.global_rotation = dir_vel
+	
+	if is_on_wall() or is_on_floor():
+		print("exit")
+		queue_free()
+	
+	move_and_slide()
 
 func _on_visible_on_screen_enabler_2d_screen_exited():
 	queue_free()
