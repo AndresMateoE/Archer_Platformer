@@ -63,18 +63,18 @@ func shoot():
 			animated_sprite.flip_h = true
 		else:
 			animated_sprite.flip_h = false
-
+		var shoot_power = 800
 		if (shoot_timer.get_time_left() < 1.5) and (shoot_timer.get_time_left() > 1):
-			arrow_speed = 100
+			arrow_speed = 0.5 * shoot_power
 			#print("shoot2")
 		elif shoot_timer.get_time_left() < 1 and shoot_timer.get_time_left() > 0.5:
-			arrow_speed = 200
+			arrow_speed = 0.7 * shoot_power
 			#print("shoot3")
 		elif shoot_timer.get_time_left() < 0.5 and shoot_timer.get_time_left() > 0.1:
-			arrow_speed = 300
+			arrow_speed = 0.9 * shoot_power
 			#print("shoot4")
 		else:
-			arrow_speed = 350
+			arrow_speed = 1 * shoot_power
 	if Input.is_action_just_released("shoot"):
 		var arrow_instance = arrow.instantiate()
 		animated_sprite.play("bow_attack_realese")
