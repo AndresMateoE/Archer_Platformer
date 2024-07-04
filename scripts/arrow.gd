@@ -21,8 +21,8 @@ func _physics_process(delta):
 	vel.x = (position.x - ((Vector2.RIGHT).rotated(rotation)*speed).x * delta - player_position.x) /delta
 	vel.y = (position.y - (((Vector2.RIGHT).rotated(rotation)*speed).y + velocity.y) * delta - player_position.y) /delta
 	
-	init_velocity.x = ((Vector2.RIGHT).rotated(rotation)*speed).x
-	init_velocity.y = ((Vector2.RIGHT).rotated(rotation)*speed).y
+	#init_velocity.x = ((Vector2.RIGHT).rotated(rotation)*speed).x
+	#init_velocity.y = ((Vector2.RIGHT).rotated(rotation)*speed).y
 	
 	position.x += ((Vector2.RIGHT).rotated(rotation)*speed).x * delta
 	position.y += (((Vector2.RIGHT).rotated(rotation)*speed).y + velocity.y) * delta
@@ -46,6 +46,9 @@ func _physics_process(delta):
 		elif bounces == 0:
 			print("exit")
 			queue_free()
+	if is_on_floor():
+		print("exit")
+		queue_free()
 	
 	move_and_slide()
 

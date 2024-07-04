@@ -14,7 +14,7 @@ var last_floor = false
 # Shooting Variables
 var shooting = false
 var arrow_speed = 100
-var cancel_shoot = true
+var cancel_shoot = false
 @onready var arrow = preload("res://scenes/arrow.tscn")
 @onready var bow_marker_right = $Bow_Marker_Right
 @onready var bow_marker_left = $Bow_Marker_Left
