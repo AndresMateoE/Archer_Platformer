@@ -14,6 +14,7 @@ var last_floor = false
 # Shooting Variables
 var shooting = false
 var arrow_speed = 100
+var cancel_shoot = true
 @onready var arrow = preload("res://scenes/arrow.tscn")
 @onready var bow_marker_right = $Bow_Marker_Right
 @onready var bow_marker_left = $Bow_Marker_Left
@@ -52,6 +53,8 @@ func _physics_process(delta):
 	
 
 func shoot():
+
+		
 	var direction = 1 if $AnimatedSprite2D.flip_h else -1
 	if Input.is_action_just_pressed("shoot"):
 		$Shoot_timer.start()
@@ -59,38 +62,47 @@ func shoot():
 		animated_sprite.play("bow_attack")
 		
 	if Input.is_action_pressed("shoot"):
-		if (get_global_mouse_position()-animated_sprite.global_position).x < 0:
-			animated_sprite.flip_h = true
+		if Input.is_action_just_pressed("cancel_shoot"):
+			cancel_shoot = true
+			animated_sprite.stop()
 		else:
-			animated_sprite.flip_h = false
-		var shoot_power = 800
-		if (shoot_timer.get_time_left() < 1.5) and (shoot_timer.get_time_left() > 1):
-			arrow_speed = 0.5 * shoot_power
-			#print("shoot2")
-		elif shoot_timer.get_time_left() < 1 and shoot_timer.get_time_left() > 0.5:
-			arrow_speed = 0.7 * shoot_power
-			#print("shoot3")
-		elif shoot_timer.get_time_left() < 0.5 and shoot_timer.get_time_left() > 0.1:
-			arrow_speed = 0.9 * shoot_power
-			#print("shoot4")
-		else:
-			arrow_speed = 1 * shoot_power
+			if (get_global_mouse_position()-animated_sprite.global_position).x < 0:
+				animated_sprite.flip_h = true
+			else:
+				animated_sprite.flip_h = false
+			var shoot_power = 800
+			if (shoot_timer.get_time_left() < 1.5) and (shoot_timer.get_time_left() > 1):
+				arrow_speed = 0.5 * shoot_power
+				#print("shoot2")
+			elif shoot_timer.get_time_left() < 1 and shoot_timer.get_time_left() > 0.5:
+				arrow_speed = 0.7 * shoot_power
+				#print("shoot3")
+			elif shoot_timer.get_time_left() < 0.5 and shoot_timer.get_time_left() > 0.1:
+				arrow_speed = 0.9 * shoot_power
+				#print("shoot4")
+			else:
+				arrow_speed = 1 * shoot_power
 	if Input.is_action_just_released("shoot"):
-		var arrow_instance = arrow.instantiate()
-		animated_sprite.play("bow_attack_realese")
-		if direction > 0:
-			get_parent().add_child(arrow_instance)
-			arrow_instance.global_position = $Bow_Marker_Left.global_position
-			arrow_instance.rotation = $Bow_Marker_Left.rotation
-			arrow_instance.speed = arrow_speed
-			arrow_instance.velocity = velocity * 0.2
-		if direction < 0:
-			get_parent().add_child(arrow_instance)
-			arrow_instance.global_position = $Bow_Marker_Right.global_position
-			arrow_instance.rotation = $Bow_Marker_Right.rotation
-			arrow_instance.speed = arrow_speed
-			arrow_instance.velocity = velocity * 0.2
-		shooting = false
+		if cancel_shoot:
+			cancel_shoot = false
+		else:
+			var arrow_instance = arrow.instantiate()
+			animated_sprite.play("bow_attack_realese")
+			if direction > 0:
+				get_parent().add_child(arrow_instance)
+				arrow_instance.global_position = $Bow_Marker_Left.global_position
+				arrow_instance.rotation = $Bow_Marker_Left.rotation
+				arrow_instance.speed = arrow_speed
+				arrow_instance.velocity = velocity * 0.2
+			if direction < 0:
+				get_parent().add_child(arrow_instance)
+				arrow_instance.global_position = $Bow_Marker_Right.global_position
+				arrow_instance.rotation = $Bow_Marker_Right.rotation
+				arrow_instance.speed = arrow_speed
+				arrow_instance.velocity = velocity * 0.2
+			shooting = false
+
+
 
 func move(delta):
 		# Add the gravity.
