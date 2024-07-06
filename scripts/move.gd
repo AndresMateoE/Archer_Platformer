@@ -14,6 +14,7 @@ var last_floor = false
 # Shooting Variables
 var shooting = false
 var arrow_speed = 100
+var init_vel_arrow = Vector2()
 var cancel_shoot = false
 @onready var arrow = preload("res://scenes/arrow.tscn")
 @onready var bow_marker_right = $Bow_Marker_Right
@@ -53,7 +54,6 @@ func _physics_process(delta):
 	
 
 func shoot():
-
 		
 	var direction = 1 if $AnimatedSprite2D.flip_h else -1
 	if Input.is_action_just_pressed("shoot"):
@@ -92,15 +92,19 @@ func shoot():
 				get_parent().add_child(arrow_instance)
 				arrow_instance.global_position = $Bow_Marker_Left.global_position
 				arrow_instance.rotation = $Bow_Marker_Left.rotation
+				arrow_instance.init_vel_arrow = (Vector2.RIGHT).rotated($Bow_Marker_Left.rotation)*arrow_speed
 				arrow_instance.speed = arrow_speed
 				arrow_instance.velocity = velocity * 0.2
 			if direction < 0:
 				get_parent().add_child(arrow_instance)
 				arrow_instance.global_position = $Bow_Marker_Right.global_position
 				arrow_instance.rotation = $Bow_Marker_Right.rotation
+				arrow_instance.init_vel_arrow = (Vector2.RIGHT).rotated($Bow_Marker_Right.rotation)*arrow_speed
+				#arrow_instance.init_vel_arrow= ((Vector2.RIGHT).rotated(rotation)*arrow_speed)
 				arrow_instance.speed = arrow_speed
 				arrow_instance.velocity = velocity * 0.2
 			shooting = false
+			
 
 
 
