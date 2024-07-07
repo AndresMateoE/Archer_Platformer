@@ -28,7 +28,7 @@ func _physics_process(delta):
 	#position.y += (((Vector2.RIGHT).rotated(rotation)*speed).y + velocity.y) * delta
 	
 	var dir_vel = atan(vel.y/vel.x)
-	$Sprite2D.global_rotation = dir_vel
+	$Sprite2D.global_rotation = dir_vel * 1.5
 	
 	if not is_on_wall():
 		last_velocity = vel
